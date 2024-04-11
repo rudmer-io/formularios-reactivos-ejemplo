@@ -28,6 +28,12 @@
         </div>
         <button type="submit" [disabled]="myForm.invalid">Submit</button>
     </form>
+
+    <div>
+        <ul *ngFor="let prod of productos">
+            <li>{{prod.id}} - Nombre: {{ prod.name }} - Precio: ${{ prod.price }} </li>
+        </ul>
+    </div>
 </div>
 
 
