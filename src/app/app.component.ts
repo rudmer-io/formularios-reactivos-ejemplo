@@ -3,6 +3,44 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TestServiceService } from './services/test-service.service';
+import { AbstractControl, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
+import { error } from 'console';
+
+export function edadMayorQue18Validator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const edad = control.value;
+    if (edad !== null && isNaN(edad)) {
+      return { notANumber: true };
+    }
+    return edad > 18 ? null : { menorQue18: true };
+  };
+}
+
+export function fechaRangoValidator(controlName: string): AsyncValidatorFn {
+  return (control: AbstractControl): Promise<{ [key: string]: any } | null> => {
+    return new Promise((resolve, reject) => {
+      const fecha = control.value;
+
+      if (fecha) {
+        const fechaTimestamp = new Date(fecha).getTime();
+        const minDate = new Date('2024-04-15').getTime();
+        const maxDate = new Date('2024-04-20').getTime();
+
+        if (fechaTimestamp < minDate || fechaTimestamp > maxDate) {
+          const errorKey =
+            controlName === 'fechaDesde'
+              ? 'rangoInvalidoDesde'
+              : 'rangoInvalidoHasta';
+          resolve({ [errorKey]: true });
+        } else {
+          resolve(null);
+        }
+      } else {
+        resolve(null);
+      }
+    });
+  };
+}
 
 @Component({
   selector: 'app-root',
@@ -56,7 +94,11 @@ export class AppComponent implements OnInit {
     this.myForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      edad: ['', [Validators.required, edadMayorQue18Validator()]],
       email: ['', [Validators.required, Validators.email]],
+      fechaDesde: ['', Validators.required, fechaRangoValidator('fechaDesde')],
+      fechaHasta: ['', Validators.required, fechaRangoValidator('fechaHasta')],
+      areaGrupo: ['', Validators.required],
     });
   }
 
