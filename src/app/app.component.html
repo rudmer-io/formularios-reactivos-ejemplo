@@ -120,7 +120,7 @@
 </table> -->
 
 
-
+<p *ngIf="error" class="error-message">{{this.error}}</p>
 <table>
   <thead>
     <tr>
@@ -158,11 +158,14 @@
       <td>{{ item.created_at | date: 'dd-MM-yyyy' }}</td>
       <td>{{ item.updated_at | date: 'dd-MM-yyyy'}}</td>
       <td>
-        <button (click)="llenarFormulario(item)">Editar</button>
+        <button class="danger" (click)="llenarFormulario(item)">Editar</button>
+        <button (click)="borrarItem(item.item_id)">Eliminar</button>
       </td>
     </tr>
   </tbody>
 </table>
+
+
 
 <form (ngSubmit)="updateItem(nuevoItem.item_id)">
 
