@@ -157,14 +157,26 @@ export class AppComponent implements OnInit {
     });
   }
 
-  items: any[] = [];
+  items: any;
+  error: any;
   obtenerItems() {
     const token =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImR1bGlhbmFAZ21haWwuY29tMiIsImlhdCI6MTcxMzc5Nzg1NywiZXhwIjoxNzEzODg0MjU3fQ.x2cfvvQkuNfJuSLfI7sgZMI7eU2N0-cK453lCRe45cY';
-    this.testService.getItems(token).subscribe((res: Object) => {
-      this.items = res as any[];
-    });
+    this.testService.getItems(token).subscribe(
+      (res: any) => {
+        // Cambiado a 'any'
+        // Manejo exitoso de la respuesta
+        this.items = res;
+        this.error = null;
+      },
+      (error) => {
+        // Manejo del error
+        console.error('Error al obtener los ítems:', error);
+        this.error = error;
+      }
+    );
   }
+
   nuevoItem: any = {};
   token =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImR1bGlhbmFAZ21haWwuY29tMiIsImlhdCI6MTcxMzc5Nzg1NywiZXhwIjoxNzEzODg0MjU3fQ.x2cfvvQkuNfJuSLfI7sgZMI7eU2N0-cK453lCRe45cY';
@@ -192,5 +204,21 @@ export class AppComponent implements OnInit {
 
   llenarFormulario(item: any) {
     this.nuevoItem = { ...item };
+  }
+  mensaje: string = '';
+  borrarItem(id: number) {
+    this.testService.deleteItem(this.token, id).subscribe(
+      (respuesta) => {
+        console.log('Ítem borrado exitosamente:', respuesta);
+        this.error = null;
+
+        this.mensaje = 'Ítem borrado exitosamente';
+        alert(this.mensaje);
+      },
+      (error) => {
+        console.error('Error al borrar el ítem:', error);
+        this.error = error;
+      }
+    );
   }
 }
