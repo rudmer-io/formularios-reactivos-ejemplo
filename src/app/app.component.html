@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="form-container">
     <h1>Formulario Reactivo</h1>
     <div>
@@ -8,7 +8,7 @@
         class="error-message">
         First Name is required
       </div>
-      <!-- <p>Reactive Extensions for JavaScript</p>> -->
+
     </div>
     <div>
       <label for="lastName"><strong>Apellido:</strong></label>
@@ -58,5 +58,159 @@
     </div>
     <button type="submit" [disabled]="myForm.invalid" class="submit-button">Submit</button>
   </form>
+
+  <div>
+    <ul *ngFor="let prod of productos">
+      <li>
+        {{ prod.id }} - Nombre: {{ prod.name }} - Precio: ${{ prod.price }}
+      </li>
+    </ul>
+  </div>
+</div> -->
+
+<!-- <router-outlet /> -->
+
+<!-- <h1>Monto: {{amount | currency:'USD':true:'1.2-2'}}</h1>
+<h1>Monto: {{amount | currency:'EUR'}}</h1>
+<h1>Fecha: {{fecha | date:'dd-MM-yyyy'}}</h1> -->
+<!-- <h1>{{ciudad | lowercase}}</h1> -->
+<!-- <h1>Ficha: {{ficha | removeLeadingZeros }}</h1> -->
+<!-- <h1 >{{a | percent: '4.3-5'}}</h1>
+<h1>B: {{ b | percent: '1.2-2' }}</h1> -->
+<!-- <h1>{{ empresa | capitalize }}</h1>
+
+<h1>The hero's birthday is {{ birthday | date:"shortDate" }} in the "shortDate" format.</h1>
+
+<h1>The hero's birthday is {{ birthday | date:format }} in "{{format}}" format.
+  Click the toggle button to change formats.</h1>
+
+<button *ngIf="toggle" type="button" (click)="toggleFormat()">Toggle Format</button>
+<button *ngIf="puedeAprobarReportes" type="button" (click)="toggleFormat()">APROBAR</button> -->
+<h1><u>Ocultando la información sensible</u></h1>
+<div class="sensitive-info">
+  <h2>Numero de tarjeta: {{ '1234 5678 9012 3456' | hideSensitiveInfo }}</h2>
+  <h2>Email: {{ 'rudmermartinez@gmail.com' | hideSensitiveInfo }}</h2>
 </div>
 
+<h1><u>Ordenado por nombre</u></h1>
+<div class="sorted-items">
+  <div *ngFor="let item of productos | sortBy:'name':'asc'" class="item">
+    <div class="item-details">
+      <h2 class="item-name">{{ item.name }}</h2>
+      <h2 class="item-age">Precio: {{ item.price | currency : 'USD'}}</h2>
+    </div>
+  </div>
+</div>
+
+<!-- <table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Completed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tarea of tareas">
+      <td>{{ tarea.id }}</td>
+      <td>{{ tarea.title }}</td>
+      <td>{{ tarea.completed ? 'Completed' : 'Not Completed' }}</td>
+    </tr>
+  </tbody>
+</table> -->
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Aplicación</th>
+      <th>URL de la Imagen</th>
+      <th>Código del Ítem</th>
+      <th>Habilitado</th>
+      <th>Fabricante</th>
+      <th>Precio de Venta</th>
+      <th>Precio de Costo</th>
+      <th>Existencia</th>
+      <th>ID de la Categoría</th>
+      <th>Moneda del Costo</th>
+      <th>Creado en</th>
+      <th>Actualizado en</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{ item.item_id }}</td>
+      <td>{{ item.name }}</td>
+      <td>{{ item.application }}</td>
+      <td><img src="{{ item.url_image }}" alt="Imagen del ítem" style="max-width: 100px; max-height: 100px;"></td>
+      <td>{{ item.item_code }}</td>
+      <td>{{ item.enabled ? 'Sí' : 'No' }}</td>
+      <td>{{ item.manufacturer }}</td>
+      <td>{{ item.sale_price | currency : 'USD'}}</td>
+      <td>{{ item.cost_price | currency : 'EUR'}}</td>
+      <td>{{ item.stock }}</td>
+      <td>{{ item.category_id }}</td>
+      <td>{{ item.cost_currency }}</td>
+      <td>{{ item.created_at | date: 'dd-MM-yyyy' }}</td>
+      <td>{{ item.updated_at | date: 'dd-MM-yyyy'}}</td>
+      <td>
+        <button (click)="llenarFormulario(item)">Editar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<form (ngSubmit)="updateItem(nuevoItem.item_id)">
+
+  <label>Nombre:</label>
+  <input type="text" [(ngModel)]="nuevoItem.name" name="name" required><br>
+
+  <label>Aplicación:</label>
+  <input type="text" [(ngModel)]="nuevoItem.application" name="application" required><br>
+
+  <label>URL de la Imagen:</label>
+  <input type="text" [(ngModel)]="nuevoItem.url_image" name="url_image" required><br>
+
+
+  <label>Habilitado:</label>
+  <input type="checkbox" [(ngModel)]="nuevoItem.enabled" name="enabled"><br>
+
+  <label>Fabricante:</label>
+  <input type="text" [(ngModel)]="nuevoItem.manufacturer" name="manufacturer" required><br>
+
+  <label>Precio de Venta:</label>
+  <input type="number" [(ngModel)]="nuevoItem.sale_price" name="sale_price" required><br>
+
+  <label>Precio de Costo:</label>
+  <input type="number" [(ngModel)]="nuevoItem.cost_price" name="cost_price" required><br>
+
+  <label>Existencia:</label>
+  <input type="number" [(ngModel)]="nuevoItem.stock" name="stock" required><br>
+
+  <label>ID de la Categoría:</label>
+  <input type="text" [(ngModel)]="nuevoItem.category_id" name="category_id" required><br>
+
+  <label>Moneda del Costo:</label>
+  <input type="text" [(ngModel)]="nuevoItem.cost_currency" name="cost_currency" required><br>
+
+  <label>Creado en:</label>
+  <input type="text" [(ngModel)]="nuevoItem.created_at" name="created_at" required><br>
+
+  <label>Actualizado en:</label>
+  <input type="text" [(ngModel)]="nuevoItem.updated_at" name="updated_at" required><br>
+
+  <label>ID del Creador:</label>
+  <input type="text" [(ngModel)]="nuevoItem.creator_id" name="creator_id" required><br>
+
+  <label>ID de la Compatibilidad:</label>
+  <input type="text" [(ngModel)]="nuevoItem.compatibility_id" name="compatibility_id" required><br>
+
+  <label>ID de la Moneda:</label>
+  <input type="text" [(ngModel)]="nuevoItem.currency_id" name="currency_id" required><br>
+
+  <button type="submit">Guardar</button>
+</form>
