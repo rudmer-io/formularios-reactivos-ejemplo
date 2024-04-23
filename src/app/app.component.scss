@@ -49,3 +49,82 @@ input {
   background-color: #aaa;
   cursor: not-allowed;
 }
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+}
+
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+}
+
+u {
+  text-decoration: underline;
+}
+
+/* Estilos para los elementos con información sensible */
+.sensitive-info {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+/* Estilos para los elementos ordenados */
+.sorted-items {
+  margin-top: 20px;
+}
+
+/* Estilos específicos para el nombre y la edad */
+.item {
+  margin-bottom: 10px;
+}
+
+.item-details {
+  display: flex;
+  align-items: center;
+}
+
+.item-name {
+  font-weight: bold;
+  color: #007bff; /* Azul */
+  margin-right: 10px;
+}
+
+.item-age {
+  color: #28a745; /* Verde */
+}
+
+
+/* Estilo para la tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+}
+
+/* Estilo para los encabezados de la tabla */
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+/* Estilo para las celdas de la tabla */
+td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+/* Estilo para las filas impares */
+tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+/* Estilo para las filas al pasar el ratón */
+tbody tr:hover {
+  background-color: #e5e5e5;
+}
